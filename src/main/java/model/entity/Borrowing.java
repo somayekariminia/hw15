@@ -1,4 +1,4 @@
 package model.entity;
 
-public class Brrowing {
+public class Borrowing {
 }

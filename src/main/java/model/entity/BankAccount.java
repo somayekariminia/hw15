@@ -1,2 +1,4 @@
-package model.entity;public class BankAccount {
+package model.entity;
+
+public class BankAccount {
 }
