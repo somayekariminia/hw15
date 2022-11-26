@@ -1,4 +1,4 @@
 package model.entity;
 
-public class EducateLoan {
+public class EducateLoan extends Loan {
 }

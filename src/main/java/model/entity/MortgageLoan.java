@@ -1,7 +1,6 @@
 package model.entity;
-
 public class MortgageLoan {
-    String Lease;
+    String LeaseCode;
     Person wife;
-
+    Address address;
 }

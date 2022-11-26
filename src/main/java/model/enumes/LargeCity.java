@@ -1,0 +1,5 @@
+package model.enumes;
+
+public enum LargeCity {
+    GILAN,AZABIYJANSHARGHI,ESFAHAN,PHARS,KHOZESTAN,QOM,KHORASANRAZAVI,ALBORZ
+}
