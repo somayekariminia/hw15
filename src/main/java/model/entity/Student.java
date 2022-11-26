@@ -7,14 +7,7 @@ import javax.persistence.Entity;
 import java.util.Date;
 
 
-public class Student {
-    String firstName;
-    String lastName;
-    String nameFather;
-    String nameMother;
-    String nationalCode;
-    String numberIdentity;
-    Date birthday;
+public class Student extends Person{
     String numberStudent;
     University university;
     Integer enterYear;
