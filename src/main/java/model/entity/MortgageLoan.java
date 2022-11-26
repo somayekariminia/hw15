@@ -1,2 +1,4 @@
-package model.entity;public class Mortgageloan {
+package model.entity;
+
+public class MortgageLoan {
 }
