@@ -2,10 +2,10 @@ package model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import model.enumes.Degree;
-import model.enumes.TypeLoan;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Setter
@@ -14,8 +14,18 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StudentLoan extends Loan {
-    TypeLoan typeLoan;
-    Degree degree;
+public class AllocatedLoan {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int Id;
+    @ManyToOne
+    Student student;
+    @ManyToOne
+    Loan loan;
+    @Temporal(value = TemporalType.DATE)
+    Date receiveDate;
+    @OneToMany
+    List<AllocatedLoan> allocatedLoanList;
+    @OneToOne
+    CreditCard creditCard;
 }
-
