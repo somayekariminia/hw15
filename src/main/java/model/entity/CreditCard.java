@@ -1,8 +1,21 @@
 package model.entity;
 
-import java.util.Date;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-public class BankAccount {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Date;
+@Entity
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CreditCard {
+    @Id
+    int id;
     String cardNumber;
     String ccv2;
     String accountNumber;

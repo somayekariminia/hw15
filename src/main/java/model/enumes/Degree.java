@@ -1,5 +1,5 @@
 package model.enumes;
 
-public enum Education {
+public enum Degree {
     associate, Bachelor, Master, PHD
 }
