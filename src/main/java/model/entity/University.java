@@ -4,10 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import model.enumes.TypeUniversity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Setter
@@ -22,5 +19,6 @@ public class University {
     int id;
     String city;
     String name;
+    @Enumerated
     TypeUniversity typeUniversity;
 }

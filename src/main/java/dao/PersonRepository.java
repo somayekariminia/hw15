@@ -5,8 +5,7 @@ import model.entity.Student;
 
 import javax.persistence.EntityManager;
 
-public class PersonRepository<T extends Person> extends Repository<T> {
-
+public class PersonRepository<T extends Person> implements Repository<T> {
 
     @Override
     public void save(T t) {

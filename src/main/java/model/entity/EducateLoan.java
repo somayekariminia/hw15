@@ -6,6 +6,7 @@ import model.enumes.Degree;
 import model.enumes.TypeLoan;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 
 @Entity
 @Setter
@@ -14,7 +15,8 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StudentLoan extends Loan {
+public class EducateLoan extends Loan {
+    @Enumerated
     TypeLoan typeLoan;
     Degree degree;
 }

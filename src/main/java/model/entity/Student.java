@@ -4,9 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import model.enumes.Degree;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -21,11 +19,13 @@ public class Student extends Person {
     @ManyToOne
     University university;
     Integer enterYear;
+    @Enumerated
     Degree degree;
     @Embedded
-   InfoAccount infoAccount;
+    InfoAccount infoAccount;
     boolean dorm;
     @Embedded
     Address address;
-    List<AllocatedLoan> allocatedLoanList;
+    @OneToMany
+    List<StudentLoan> studentLoanList;
 }

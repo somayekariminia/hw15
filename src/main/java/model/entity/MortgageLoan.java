@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class MortgageLoan extends Loan {
- TypeCity typeCity;
+    TypeCity typeCity;
 }

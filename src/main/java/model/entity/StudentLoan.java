@@ -14,18 +14,19 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AllocatedLoan {
+@IdClass(StudentLoanId.class)
+public class StudentLoan {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
     @ManyToOne
     Student student;
+    @Id
     @ManyToOne
     Loan loan;
     @Temporal(value = TemporalType.DATE)
     Date receiveDate;
     @OneToMany
-    List<AllocatedLoan> allocatedLoanList;
+    List<Installments> installments;
     @OneToOne
     CreditCard creditCard;
+    String lease;
 }

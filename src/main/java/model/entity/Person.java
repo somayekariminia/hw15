@@ -24,6 +24,7 @@ public class Person {
     String nameMother;
     String nationalCode;
     String numberIdentity;
+    @Temporal(value = TemporalType.DATE)
     Date birthday;
     boolean isMarried;
 }
