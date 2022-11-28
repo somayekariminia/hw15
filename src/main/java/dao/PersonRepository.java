@@ -1,0 +1,65 @@
+package dao;
+
+import model.entity.Person;
+import model.entity.Student;
+
+import javax.persistence.EntityManager;
+
+public class PersonRepository<T extends Person> extends Repository<T> {
+
+
+    @Override
+    public void save(T t) {
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(t);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void update(T t) {
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(t);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void delete(T t) {
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            T t1 = entityManager.merge(t);
+            entityManager.persist(t1);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public T getById(int id) {
+       Student student=null;
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            student = entityManager.find(Student.class, id);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return (T) student;
+    }
+}
