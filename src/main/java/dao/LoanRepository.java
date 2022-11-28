@@ -46,7 +46,7 @@ public class LoanRepository<T extends Loan> implements Repository<T> {
 
     @Override
     public T getById(int id) {
-        Loan loan=null;
+        Loan loan = null;
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
             entityManager.getTransaction().begin();

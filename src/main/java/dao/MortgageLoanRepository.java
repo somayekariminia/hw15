@@ -1,13 +1,14 @@
 package dao;
 
-import model.entity.Loan;
 import model.entity.MortgageLoan;
 
 public class MortgageLoanRepository extends LoanRepository<MortgageLoan> {
-    private static MortgageLoanRepository mortgageLoanRepository=new MortgageLoanRepository();
+    private static MortgageLoanRepository mortgageLoanRepository = new MortgageLoanRepository();
+
+    private MortgageLoanRepository() {
+    }
+
     public static MortgageLoanRepository getInstance() {
         return mortgageLoanRepository;
-    }
-    private MortgageLoanRepository() {
     }
 }

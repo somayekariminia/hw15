@@ -49,7 +49,7 @@ public class PersonRepository<T extends Person> implements Repository<T> {
 
     @Override
     public T getById(int id) {
-       Student student=null;
+        Student student = null;
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
             entityManager.getTransaction().begin();
@@ -60,5 +60,19 @@ public class PersonRepository<T extends Person> implements Repository<T> {
             entityManager.getTransaction().rollback();
         }
         return (T) student;
+    }
+    public  T getByNationalCode(String nationalCode){
+        Person person = null;
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+           person = (Person) entityManager.createQuery("from Person p where p.nationalCode=:nationalCode")
+                    .setParameter("nationalCode", nationalCode).getSingleResult();
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return (T) person;
     }
 }
