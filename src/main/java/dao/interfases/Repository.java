@@ -1,4 +1,4 @@
-package dao;
+package dao.interfases;
 
 public interface Repository<T> {
     public abstract void save(T t);

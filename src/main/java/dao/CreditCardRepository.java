@@ -1,5 +1,6 @@
 package dao;
 
+import dao.interfases.Repository;
 import model.entity.CreditCard;
 
 import javax.persistence.EntityManager;

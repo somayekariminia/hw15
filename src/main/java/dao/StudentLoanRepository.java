@@ -1,11 +1,12 @@
 package dao;
 
+import dao.interfases.Repository;
 import model.entity.StudentLoan;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public class StudentLoanRepository implements Repository<StudentLoan>{
+public class StudentLoanRepository implements Repository<StudentLoan> {
     private static StudentLoanRepository studentLoanRepository = new StudentLoanRepository();
 
     private StudentLoanRepository() {

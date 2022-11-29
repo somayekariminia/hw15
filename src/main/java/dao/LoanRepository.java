@@ -1,10 +1,11 @@
 package dao;
 
+import dao.interfases.Repository;
 import model.entity.Loan;
 
 import javax.persistence.EntityManager;
 
-public class LoanRepository<T extends Loan> implements Repository<T> {
+public abstract class LoanRepository<T extends Loan> implements Repository<T> {
     public void save(T t) {
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {

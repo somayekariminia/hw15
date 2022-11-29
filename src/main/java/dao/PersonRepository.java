@@ -1,11 +1,12 @@
 package dao;
 
+import dao.interfases.Repository;
 import model.entity.Person;
 import model.entity.Student;
 
 import javax.persistence.EntityManager;
 
-public class PersonRepository<T extends Person> implements Repository<T> {
+public abstract class PersonRepository<T extends Person> implements Repository<T> {
 
     @Override
     public void save(T t) {
