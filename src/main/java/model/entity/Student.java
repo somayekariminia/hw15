@@ -21,10 +21,10 @@ public class Student extends Person {
     Integer enterYear;
     @Enumerated
     Degree degree;
-    @Embedded
+    @OneToOne
     InfoAccount infoAccount;
     boolean dorm;
-    @Embedded
+    @OneToOne
     Address address;
     @OneToMany
     List<StudentLoan> studentLoanList;
