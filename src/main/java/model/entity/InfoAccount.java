@@ -18,6 +18,6 @@ public class InfoAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int i;
-    String userMName;
+    String userName;
     String password;
 }

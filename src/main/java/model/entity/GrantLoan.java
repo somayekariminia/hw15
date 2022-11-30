@@ -15,7 +15,7 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EducateLoan extends Loan {
+public class GrantLoan extends Loan {
     @Enumerated
     TypeLoan typeLoan;
     Degree degree;

@@ -20,7 +20,7 @@ public class ValidationInputs {
         else
             throw new ValidationException("yourPassword is invalid");
         if (password1.length() != 8)
-            throw new IllegalArgumentException("length your password more 8");
+            throw new ValidationException("length your password more 8");
         else
             return password1;
     }

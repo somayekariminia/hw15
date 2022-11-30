@@ -24,4 +24,11 @@ public class UtilDate {
         long daysBetween =Math.abs(Duration.between(localDateTime1, localDateTime2).toDays());
         return daysBetween;
     }
+    public  static boolean timeRegistryLoan(LocalDateTime date) {
+        if((date.getMonthValue()==10 && (date.getDayOfMonth()>=21 && date.getDayOfMonth()<=28) )|| ((date.getMonthValue()==2 && (date.getDayOfMonth()>=13 && date.getDayOfMonth()<=20))))
+            return true;
+        else
+            return false;
+    }
+
 }

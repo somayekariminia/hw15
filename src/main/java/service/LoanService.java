@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface LoanService<T> {
-    void timeRegistryLoan();
+    void timeRegistryLoan(Date date);
 
     void WithdrawLoan(Student student, CreditCard creditCard);
 

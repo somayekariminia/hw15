@@ -12,7 +12,7 @@ public class StudentLoanRepository implements Repository<StudentLoan> {
     private StudentLoanRepository() {
     }
 
-    public StudentLoanRepository getInstance() {
+    public  static StudentLoanRepository getInstance() {
         return studentLoanRepository;
     }
 

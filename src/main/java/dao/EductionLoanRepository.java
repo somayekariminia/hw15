@@ -1,8 +1,8 @@
 package dao;
 
-import model.entity.EducateLoan;
+import model.entity.GrantLoan;
 
-public class EductionLoanRepository extends LoanRepository<EducateLoan> {
+public class EductionLoanRepository extends LoanRepository<GrantLoan> {
     private static EductionLoanRepository eductionLoanRepository = new EductionLoanRepository();
 
     private EductionLoanRepository() {
