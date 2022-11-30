@@ -37,4 +37,31 @@ public class ValidationInputs {
         else
             throw new ValidationException("name or lastName is invalid ");
     }
+
+    public static String evaluateCreditCard(String numberCard) {
+        if (numberCard.matches("[0-9]{16}"))
+            return numberCard;
+        else
+            throw new ValidationException("numberCard isnt valid");
+    }
+
+    public static String evaluateAccountNumber(String accountNumber) {
+        if (accountNumber.matches("[0-9]{10}"))
+            return accountNumber;
+        else
+            throw new ValidationException("accountNumber isnt valid");
+    }
+
+    public String findNameBank(String numberCard) {
+        if (numberCard.substring(0, 5).equals("589463"))
+            return "Rafah";
+        else if (numberCard.substring(0, 5).equals("627353"))
+            return "Tajarat";
+        else if (numberCard.substring(0, 5).equals("603799"))
+            return "Melli";
+        else if (numberCard.substring(0, 5).equals("628023"))
+            return "maskan";
+        else
+            return null;
+    }
 }
