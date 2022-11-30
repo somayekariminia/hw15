@@ -1,6 +1,7 @@
 package Util;
 
 import Exeption.ValidationException;
+import model.enumes.NameBank;
 
 public class ValidationInputs {
     private static ValidationInputs validationInputs = new ValidationInputs();
@@ -52,15 +53,16 @@ public class ValidationInputs {
             throw new ValidationException("accountNumber isnt valid");
     }
 
-    public String findNameBank(String numberCard) {
-        if (numberCard.substring(0, 5).equals("589463"))
-            return "Rafah";
-        else if (numberCard.substring(0, 5).equals("627353"))
-            return "Tajarat";
-        else if (numberCard.substring(0, 5).equals("603799"))
-            return "Melli";
-        else if (numberCard.substring(0, 5).equals("628023"))
-            return "maskan";
+    public NameBank findNameBank(String numberCard) {
+        String subString = numberCard.substring(0,6);
+        if (subString.equals("589463"))
+            return NameBank.RAFAH;
+        else if (subString.equals("627353"))
+            return NameBank.TAJARAT;
+        else if (subString.equals("603799"))
+            return NameBank.MELLI;
+        else if (subString.equals("628023"))
+            return NameBank.MASKAN;
         else
             return null;
     }
