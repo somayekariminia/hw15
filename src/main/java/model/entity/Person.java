@@ -27,4 +27,5 @@ public class Person {
     @Temporal(value = TemporalType.DATE)
     Date birthday;
     boolean isMarried;
+
 }

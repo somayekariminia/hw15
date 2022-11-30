@@ -28,4 +28,6 @@ public class Student extends Person {
     Address address;
     @OneToMany
     List<StudentLoan> studentLoanList;
+    @OneToOne
+    Spouse spouse;
 }

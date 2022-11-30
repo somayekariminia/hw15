@@ -1,18 +1,21 @@
 package model.entity;
 
 import lombok.*;
+import model.enumes.LargeCity;
+import model.enumes.TypeCity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Arrays;
 
 @Entity
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@AllArgsConstructor
 
 public class Address {
     @Id
