@@ -22,7 +22,7 @@ public class StudentLoan {
     @Id
     @ManyToOne
     Loan loan;
-    @Temporal(value = TemporalType.DATE)
+    @Temporal(value = TemporalType.TIME)
     Date receiveDate;
     @OneToMany
     List<Installments> installments;
