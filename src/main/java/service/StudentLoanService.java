@@ -17,4 +17,5 @@ public class StudentLoanService {
         studentLoan.setReceiveDate(registryDate);
         studentLoanRepository.save(studentLoan);
       }
+
 }

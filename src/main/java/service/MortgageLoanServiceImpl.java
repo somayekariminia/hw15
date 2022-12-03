@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class MortgageLoanServiceImpl {
-   MortgageLoanRepository mortgageLoanRepository=MortgageLoanRepository.getInstance();
+    MortgageLoanRepository mortgageLoanRepository = MortgageLoanRepository.getInstance();
 
     StudentRepository studentRepository = StudentRepository.getInstance();
+    StudentLoanService studentLoanService = new StudentLoanService();
 
     public void requestForMortgageLoan(Student student, MortgageLoan mortgageLoan) {
         double amount = 0;
@@ -54,6 +55,7 @@ public class MortgageLoanServiceImpl {
             mortgageLoan.setAmount(amount);
             mortgageLoan.setTypePayment(TypePayment.DEGREE);
             mortgageLoanRepository.save(mortgageLoan);
+            studentLoanService.registry(student, mortgageLoan, UtilDate.changeLocalDateToDate(today));
         }
     }
 }

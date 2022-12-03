@@ -1,7 +1,7 @@
 package service;
 
 import Util.UtilDate;
-import dao.EductionLoanRepository;
+import dao.GrantLoanRepository;
 import dao.LoanRepository;
 import model.entity.CreditCard;
 import model.entity.GrantLoan;
@@ -16,7 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 public class LoanServiceImpl implements LoanService<GrantLoan> {
-    LoanRepository<GrantLoan>loanRepository=new EductionLoanRepository()
+    LoanRepository<GrantLoan> grantLoanRepository = GrantLoanRepository.getInstance();
+    StudentLoanService studentLoanService = new StudentLoanService();
 
     public void requestForGrandLoan(Student student, GrantLoan grantLoan) {
         double amount = 0;
@@ -33,6 +34,9 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                         amount = 26e5;
                     grantLoan.setAmount(amount);
                     grantLoan.setTypePayment(TypePayment.HALFYEAR);
+                    grantLoan.setDegree(student.getDegree());
+                    grantLoan.setTypeLoan(TypeLoan.EDUCATION);
+                    grantLoanRepository.save(grantLoan);
                 }
 
             } else if (grantLoan.getTypeLoan().equals(TypeLoan.TUITION)) {
@@ -46,11 +50,14 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                 }
                 grantLoan.setAmount(amount);
                 grantLoan.setTypePayment(TypePayment.HALFYEAR);
-
-
+                grantLoan.setDegree(student.getDegree());
+                grantLoan.setTypeLoan(TypeLoan.EDUCATION);
+                grantLoanRepository.save(grantLoan);
             } else
                 throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
+
+        studentLoanService.registry(student, grantLoan, UtilDate.changeLocalDateToDate(today));
     }
 
     @Override
