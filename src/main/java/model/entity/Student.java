@@ -30,4 +30,6 @@ public class Student extends Person {
     List<StudentLoan> studentLoanList;
     @OneToOne
     Spouse spouse;
+    @OneToOne
+    CreditCard creditCard;
 }

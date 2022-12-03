@@ -38,6 +38,4 @@ public class ValidationInputs {
         else
             throw new ValidationException("name or lastName is invalid ");
     }
-
-
 }
