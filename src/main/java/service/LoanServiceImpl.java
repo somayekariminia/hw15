@@ -1,6 +1,8 @@
 package service;
 
 import Util.UtilDate;
+import dao.EductionLoanRepository;
+import dao.LoanRepository;
 import model.entity.CreditCard;
 import model.entity.GrantLoan;
 import model.entity.Student;
@@ -14,13 +16,9 @@ import java.util.Date;
 import java.util.List;
 
 public class LoanServiceImpl implements LoanService<GrantLoan> {
+    LoanRepository<GrantLoan>loanRepository=new EductionLoanRepository()
 
-    @Override
-    public void timeRegistryLoan(Date date) {
-
-    }
-
-    public void registryLoan(Student student, GrantLoan grantLoan) {
+    public void requestForGrandLoan(Student student, GrantLoan grantLoan) {
         double amount = 0;
         LocalDateTime today = LocalDateTime.now();
         if (UtilDate.timeRegistryLoan(today)) {
@@ -48,6 +46,8 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                 }
                 grantLoan.setAmount(amount);
                 grantLoan.setTypePayment(TypePayment.HALFYEAR);
+
+
             } else
                 throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
