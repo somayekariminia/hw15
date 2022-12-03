@@ -21,5 +21,5 @@ public class CreditCard {
     String ccv2;
     String accountNumber;
     double balance;
-    Date expirationِDate;
+    Date expireDate;
 }

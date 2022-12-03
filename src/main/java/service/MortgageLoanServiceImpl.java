@@ -55,7 +55,7 @@ public class MortgageLoanServiceImpl {
             mortgageLoan.setAmount(amount);
             mortgageLoan.setTypePayment(TypePayment.DEGREE);
             mortgageLoanRepository.save(mortgageLoan);
-            studentLoanService.registry(student, mortgageLoan, UtilDate.changeLocalDateToDate(today));
+            studentLoanService.registryLoan(student, mortgageLoan, UtilDate.changeLocalDateToDate(today));
         }
     }
 }

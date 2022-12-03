@@ -38,4 +38,8 @@ public class StudentServiceImpl {
         //todo
         return false;
     }
+
+    public Student findById(int id) {
+      return   studentRepository.getById(id);
+    }
 }

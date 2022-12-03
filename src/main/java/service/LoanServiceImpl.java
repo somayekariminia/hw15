@@ -57,7 +57,7 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                 throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
 
-        studentLoanService.registry(student, grantLoan, UtilDate.changeLocalDateToDate(today));
+        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today));
     }
 
     @Override

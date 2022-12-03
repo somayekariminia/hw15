@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class StudentLoanService {
     StudentLoanRepository studentLoanRepository=StudentLoanRepository.getInstance();
-    public void registry(Student student, Loan loan, Date registryDate) {
+    public void registryLoan(Student student, Loan loan, Date registryDate) {
         StudentLoan studentLoan=new StudentLoan();
         studentLoan.setStudent(student);
         studentLoan.setLoan(loan);

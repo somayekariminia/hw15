@@ -6,6 +6,14 @@ import model.entity.CreditCard;
 import javax.persistence.EntityManager;
 
 public class CreditCardRepository implements Repository<CreditCard> {
+    private static CreditCardRepository creditCardRepository = new CreditCardRepository();
+
+    private CreditCardRepository() {
+    }
+
+    public static CreditCardRepository getInstance() {
+        return creditCardRepository;
+    }
     @Override
     public void save(CreditCard creditCard) {
 

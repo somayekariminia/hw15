@@ -50,17 +50,17 @@ public abstract class PersonRepository<T extends Person> implements Repository<T
 
     @Override
     public T getById(int id) {
-        Student student = null;
+        Person student=null;
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            student = entityManager.find(Student.class, id);
+            student = entityManager.find(Person.class, id);
             entityManager.getTransaction().commit();
             entityManager.close();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return (T) student;
+        return (T)student ;
     }
     public  T getByNationalCode(String nationalCode){
         Person person = null;

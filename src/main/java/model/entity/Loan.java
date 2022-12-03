@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 import model.enumes.Degree;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,20 +17,20 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Student extends Person {
     String numberStudent;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     University university;
     Integer enterYear;
     @Enumerated
     Degree degree;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     InfoAccount infoAccount;
     boolean dorm;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     Address address;
     @OneToMany
-    List<StudentLoan> studentLoanList;
-    @OneToOne
+    List<StudentLoan> studentLoanList=new ArrayList<>();
+    @OneToOne(cascade = CascadeType.PERSIST)
     Spouse spouse;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     CreditCard creditCard;
 }

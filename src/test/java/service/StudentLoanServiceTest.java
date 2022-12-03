@@ -8,6 +8,6 @@ class StudentLoanServiceTest {
 
 
     @Test
-    void registry() {
+    void registryLoan() {
     }
 }
