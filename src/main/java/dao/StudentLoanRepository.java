@@ -21,7 +21,7 @@ public class StudentLoanRepository implements Repository<StudentLoan> {
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(studentLoan);
+            entityManager.merge(studentLoan);
             entityManager.getTransaction().commit();
             entityManager.close();
         } catch (Exception e) {

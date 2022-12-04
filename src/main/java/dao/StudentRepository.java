@@ -47,5 +47,19 @@ public class StudentRepository extends PersonRepository<Student> {
         }
         return student ;
     }
+    public  Student getByNationalCode(String nationalCode){
+        Student student=null;
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            student = (Student) entityManager.createQuery("from Student s where s.nationalCode=:nationalCode")
+                    .setParameter("nationalCode", nationalCode).getSingleResult();
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return student;
+    }
 }
 

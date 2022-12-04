@@ -21,7 +21,7 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
 
     public void requestForGrandLoan(Student student, GrantLoan grantLoan) {
         double amount = 0;
-        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime today = LocalDateTime.of(2022,10,25,0,0);
         if (UtilDate.timeRegistryLoan(today)) {
             if (grantLoan.getTypeLoan().equals(TypeLoan.EDUCATION)) {
 
@@ -57,7 +57,7 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                 throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
 
-        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today));
+        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today),null);
     }
 
     @Override

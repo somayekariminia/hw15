@@ -51,7 +51,10 @@ class StudentServiceImplTest {
 
     @Test
     void requestLoanForMortgageLoan() {
-
+        Student student = studentsService.findById(2);
+        MortgageLoan loan = new MortgageLoan();
+        String lease="12345";
+       mortgageLoanService.requestForMortgageLoan(student, loan,lease);
     }
 /*
     @Test

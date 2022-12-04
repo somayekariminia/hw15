@@ -54,18 +54,5 @@ public  class PersonRepository<T extends Person> implements Repository<T> {
     }
 
 
-    public  T getByNationalCode(String nationalCode){
-        Person person = null;
-        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-           person = (Person) entityManager.createQuery("from Person p where p.nationalCode=:nationalCode")
-                    .setParameter("nationalCode", nationalCode).getSingleResult();
-            entityManager.getTransaction().commit();
-            entityManager.close();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
-        return (T) person;
-    }
+
 }
