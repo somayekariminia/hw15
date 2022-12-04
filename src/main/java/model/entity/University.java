@@ -19,6 +19,6 @@ public class University {
     int id;
     String city;
     String name;
-    @Enumerated
+    @Enumerated(value=EnumType.STRING)
     TypeUniversity typeUniversity;
 }

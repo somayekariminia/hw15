@@ -15,7 +15,7 @@ public class ValidationInputs {
 
     public String validationPassword(String password) {
         String password1 = null;
-        if (password.matches("(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[@,!,&,#,$]).*$"))
+        if (password.matches("(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[@!&#$]).*"))
             password1 = password;
         else
             throw new ValidationException("yourPassword is invalid");

@@ -20,7 +20,7 @@ import java.util.Arrays;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int i;
+    int id;
     String country;
     String city;
     String Street;

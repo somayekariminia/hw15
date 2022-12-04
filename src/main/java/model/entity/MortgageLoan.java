@@ -4,6 +4,8 @@ import lombok.*;
 import model.enumes.TypeCity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 @Setter
@@ -12,5 +14,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class MortgageLoan extends Loan {
+    @Enumerated(value= EnumType.STRING)
     TypeCity typeCity;
 }

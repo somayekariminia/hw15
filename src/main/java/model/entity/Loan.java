@@ -20,7 +20,7 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     double amount;
-    @Enumerated
+    @Enumerated(value=EnumType.STRING)
     TypePayment typePayment;
     @OneToMany(mappedBy = "loan")
     List<StudentLoan> loanList;

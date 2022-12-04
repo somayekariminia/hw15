@@ -6,7 +6,7 @@ import model.entity.Student;
 
 import javax.persistence.EntityManager;
 
-public abstract class PersonRepository<T extends Person> implements Repository<T> {
+public  class PersonRepository<T extends Person> implements Repository<T> {
 
     @Override
     public void save(T t) {
@@ -50,18 +50,10 @@ public abstract class PersonRepository<T extends Person> implements Repository<T
 
     @Override
     public T getById(int id) {
-        Person student=null;
-        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-            student = entityManager.find(Person.class, id);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
-        return (T)student ;
+        return null;
     }
+
+
     public  T getByNationalCode(String nationalCode){
         Person person = null;
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();

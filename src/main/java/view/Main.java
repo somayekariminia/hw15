@@ -1,6 +1,7 @@
 package view;
 
 import Util.UtilDate;
+import dao.StudentRepository;
 import model.entity.*;
 import model.enumes.Degree;
 import model.enumes.TypeUniversity;
@@ -14,8 +15,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        EntityManager pu = Persistence.createEntityManagerFactory("PU").createEntityManager();
-
+        StudentRepository studentRepository=StudentRepository.getInstance();
         Date birthday = UtilDate.changeLocalDateToDate(LocalDateTime.now());
         Person person = new Person(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true);
         University university = new University(0, "kerman", "bahonar", TypeUniversity.nonprofitUniversity);
@@ -28,11 +28,7 @@ public class Main {
         CreditCard creditCard = new CreditCard(0, "5894631298123456", "661", "1234567891", 0d, date);
         InfoAccount infoAccount = new InfoAccount(0, "somayeKarimi", person.getNationalCode());
         List<StudentLoan> studentLoanList = new ArrayList<>();
-        Student student = new Student("8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
-      //  EntityManager pu = Persistence.createEntityManagerFactory("PU").createEntityManager();
-        pu.getTransaction().begin();
-        pu.persist(person);
-        pu.getTransaction().commit();
-        pu.close();
+        Student student = new Student(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true,"8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
+        studentRepository.save(student);
     }
 }

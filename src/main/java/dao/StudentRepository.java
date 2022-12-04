@@ -1,5 +1,6 @@
 package dao;
 
+import model.entity.Person;
 import model.entity.Student;
 
 import javax.persistence.EntityManager;
@@ -31,6 +32,20 @@ public class StudentRepository extends PersonRepository<Student> {
             entityManager.getTransaction().rollback();
         }
         return student;
+    }
+    @Override
+    public Student getById(int id) {
+        Student student=null;
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            student = entityManager.find(Student.class, id);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return student ;
     }
 }
 

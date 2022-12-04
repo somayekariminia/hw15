@@ -4,23 +4,22 @@ import Util.ValidationInputs;
 import dao.StudentLoanRepository;
 import dao.StudentRepository;
 import model.entity.GrantLoan;
+import model.entity.Person;
 import model.entity.Student;
 import model.enumes.TypeLoan;
 
 public class StudentServiceImpl {
-    StudentRepository studentRepository = StudentRepository.getInstance();
-    ValidationInputs validationInputs = ValidationInputs.getInstance();
-    StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
+   private StudentRepository studentRepository = StudentRepository.getInstance();
+     private ValidationInputs validationInputs = ValidationInputs.getInstance();
+    private StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
 
     public void signUp(Student student) {
-        String firstName = validationInputs.validationNameAndLastName(student.getFirstName());
-        String lastName = validationInputs.validationNameAndLastName(student.getLastName());
-        String nationalCode = validationInputs.validationNationalCode(student.getNationalCode());
-        String password = validationInputs.validationPassword(student.getInfoAccount().getPassword());
-        if (firstName != null && lastName != null && nationalCode != null && password != null)
+      /* // String password = validationInputs.validationPassword(student.getInfoAccount().getPassword());
+        if ( password != null)
             studentRepository.save(student);
         else
-            throw new RuntimeException("yourInformation is inValid");
+            throw new RuntimeException("yourInformation is inValid");*/
+        studentRepository.save(student);
     }
 
     public Student signIn(String userName, String password) {
