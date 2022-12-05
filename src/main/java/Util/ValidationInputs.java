@@ -1,7 +1,6 @@
 package Util;
 
 import Exeption.ValidationException;
-import model.enumes.NameBank;
 
 public class ValidationInputs {
     private static ValidationInputs validationInputs = new ValidationInputs();
@@ -13,7 +12,7 @@ public class ValidationInputs {
     private ValidationInputs() {
     }
 
-    public String validationPassword(String password) {
+    public String checkUserName(String password) {
         String password1 = null;
         if (password.matches("(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[@!&#$]).*"))
             password1 = password;
@@ -25,14 +24,14 @@ public class ValidationInputs {
             return password1;
     }
 
-    public String validationNationalCode(String nationalCode) {
+    public String checkNationalCode(String nationalCode) {
         if (nationalCode.matches("[0-9]{10}"))
             return nationalCode;
         else
             throw new ValidationException("your nationalCode is invalid ");
     }
 
-    public String validationNameAndLastName(String name) {
+    public String checkNameAndLastName(String name) {
         if (name.matches("[a-zA-Z]+"))
             return name;
         else

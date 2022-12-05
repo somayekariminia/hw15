@@ -10,7 +10,7 @@ public class CreditCardService {
     {
         String cardNumber=ValidationInfoCreditCard.checkCreditCard(creditCard.getCardNumber());
         String accountNumber=ValidationInfoCreditCard.checkAccountNumber(creditCard.getAccountNumber());
-        boolean expireDate=ValidationInfoCreditCard.checkExpirationِDate(creditCard.getExpireDate());
+        boolean expireDate=ValidationInfoCreditCard.checkExpirationDate(creditCard.getExpireDate());
         if(cardNumber!=null && accountNumber!=null && expireDate==true)
             creditCardRepository.save(creditCard);
     }

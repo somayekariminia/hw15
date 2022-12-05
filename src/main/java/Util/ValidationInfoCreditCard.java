@@ -4,7 +4,6 @@ import Exeption.ValidationException;
 import model.enumes.NameBank;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.Date;
 
 public class ValidationInfoCreditCard {
@@ -22,7 +21,7 @@ public class ValidationInfoCreditCard {
             throw new ValidationException("accountNumber isnt valid");
     }
 
-    public static boolean checkExpirationِDate(Date expirationDate) {
+    public static boolean checkExpirationDate(Date expirationDate) {
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime expirationLDate = UtilDate.getLocalDateTime(expirationDate);
         if (today.getYear() <= expirationLDate.getYear() &&
@@ -32,7 +31,7 @@ public class ValidationInfoCreditCard {
             return false;
     }
 
-    public NameBank findNameBank(String numberCard) {
+    public  static NameBank findNameBank(String numberCard) {
         String subString = numberCard.substring(0, 6);
         if (subString.equals("589463"))
             return NameBank.RAFAH;

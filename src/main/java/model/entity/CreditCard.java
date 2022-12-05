@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ import java.util.Date;
 public class CreditCard {
     @Id
     int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     String cardNumber;
     String ccv2;
     String accountNumber;

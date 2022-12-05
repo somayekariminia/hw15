@@ -47,12 +47,9 @@ public  class PersonRepository<T extends Person> implements Repository<T> {
             entityManager.getTransaction().rollback();
         }
     }
-
     @Override
     public T getById(int id) {
         return null;
     }
-
-
 
 }

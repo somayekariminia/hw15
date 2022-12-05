@@ -15,11 +15,11 @@ import java.util.Date;
 import java.util.List;
 
 class StudentServiceImplTest {
+    private static StudentServiceImpl studentsService;
+    private static final PersonRepository<Person> personRepository = new PersonRepository<>();
     LoanServiceImpl loanService = new LoanServiceImpl();
     MortgageLoanServiceImpl mortgageLoanService = new MortgageLoanServiceImpl();
-   private static StudentServiceImpl studentsService ;
     StudentLoanService studentLoanService = new StudentLoanService();
-   private static PersonRepository<Person>personRepository=new PersonRepository<>();
 
     @BeforeAll
     static void setInformationStudent() {
@@ -35,10 +35,10 @@ class StudentServiceImplTest {
         spouse.setNationalCode("3120014261");
         Date date = UtilDate.changeLocalDateToDate(LocalDateTime.of(2023, 10, 30, 0, 0));
         CreditCard creditCard = new CreditCard(0, "5894631298123456", "661", "1234567891", 0d, date);
-        InfoAccount infoAccount = new InfoAccount(0, "somayeKarimi", person.getNationalCode());
+        InfoAccount infoAccount = new InfoAccount(0, "SSooMM6@", person.getNationalCode());
         List<StudentLoan> studentLoanList = new ArrayList<>();
-        Student student = new Student(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true,"8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
-       studentsService.signUp(student);
+        Student student = new Student(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true, "8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
+        // studentsService.signUp(student);
     }
 
     @Test
@@ -53,12 +53,12 @@ class StudentServiceImplTest {
     void requestLoanForMortgageLoan() {
         Student student = studentsService.findById(2);
         MortgageLoan loan = new MortgageLoan();
-        String lease="12345";
-       mortgageLoanService.requestForMortgageLoan(student, loan,lease);
+        String lease = "12345";
+        mortgageLoanService.requestForMortgageLoan(student, loan, lease);
     }
-/*
+
     @Test
-    void signUp(){
+    void signUp() {
         studentsService = new StudentServiceImpl();
         Date birthday = UtilDate.changeLocalDateToDate(LocalDateTime.now());
         Person person = new Person(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true);
@@ -70,11 +70,9 @@ class StudentServiceImplTest {
         spouse.setNationalCode("3120014261");
         Date date = UtilDate.changeLocalDateToDate(LocalDateTime.of(2023, 10, 30, 0, 0));
         CreditCard creditCard = new CreditCard(0, "5894631298123456", "661", "1234567891", 0d, date);
-        InfoAccount infoAccount = new InfoAccount(0, "SSoo66!!", person.getNationalCode());
+        InfoAccount infoAccount = new InfoAccount(0, "SSoo!!66", person.getNationalCode());
         List<StudentLoan> studentLoanList = new ArrayList<>();
-        Student student = new Student("8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
+        Student student = new Student(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true, "8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
         studentsService.signUp(student);
     }
-*/
-
 }

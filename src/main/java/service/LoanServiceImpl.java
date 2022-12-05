@@ -21,11 +21,13 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
 
     public void requestForGrandLoan(Student student, GrantLoan grantLoan) {
         double amount = 0;
-        LocalDateTime today = LocalDateTime.of(2022,10,25,0,0);
+        LocalDateTime today = LocalDateTime.of(2022, 10, 25, 0, 0);
         if (UtilDate.timeRegistryLoan(today)) {
-            if (grantLoan.getTypeLoan().equals(TypeLoan.EDUCATION)) {
 
-                {
+            if (grantLoan.getTypeLoan().equals(TypeLoan.EDUCATION)) {
+                if (student.getStudentLoanList().stream().anyMatch(studentLoan -> studentLoan.getReceiveDate().getYear() == today.getYear()))
+                    throw new RuntimeException("registry before loanEducation");
+                else {
                     if (student.getDegree().equals(Degree.Bachelor))
                         amount = 19e5;
                     else if (student.getDegree().equals(Degree.Master))
@@ -37,27 +39,33 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                     grantLoan.setDegree(student.getDegree());
                     grantLoan.setTypeLoan(TypeLoan.EDUCATION);
                     grantLoanRepository.save(grantLoan);
+                    studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
                 }
 
             } else if (grantLoan.getTypeLoan().equals(TypeLoan.TUITION)) {
-                if (!student.getUniversity().getTypeUniversity().equals(TypeUniversity.StateUniversityِDaily)) {
-                    if (student.getDegree().equals(Degree.Bachelor))
-                        amount = 13e5;
-                    else if (student.getDegree().equals(Degree.Master))
-                        amount = 26e5;
-                    else if (student.getDegree().equals(Degree.PHD))
-                        amount = 65e5;
+                if (student.getStudentLoanList().stream().anyMatch(studentLoan -> studentLoan.getReceiveDate().getYear() == today.getYear()))
+                    throw new RuntimeException("before Registry loan TuitionLoan");
+                else {
+                    if (!student.getUniversity().getTypeUniversity().equals(TypeUniversity.StateUniversityِDaily)) {
+                        if (student.getDegree().equals(Degree.Bachelor))
+                            amount = 13e5;
+                        else if (student.getDegree().equals(Degree.Master))
+                            amount = 26e5;
+                        else if (student.getDegree().equals(Degree.PHD))
+                            amount = 65e5;
+
+                        grantLoan.setAmount(amount);
+                        grantLoan.setTypePayment(TypePayment.HALFYEAR);
+                        grantLoan.setDegree(student.getDegree());
+                        grantLoan.setTypeLoan(TypeLoan.EDUCATION);
+                        grantLoanRepository.save(grantLoan);
+                        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
+                    }
                 }
-                grantLoan.setAmount(amount);
-                grantLoan.setTypePayment(TypePayment.HALFYEAR);
-                grantLoan.setDegree(student.getDegree());
-                grantLoan.setTypeLoan(TypeLoan.EDUCATION);
-                grantLoanRepository.save(grantLoan);
             } else
                 throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
-
-        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today),null);
+        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
     }
 
     @Override

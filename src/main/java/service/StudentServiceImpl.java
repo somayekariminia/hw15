@@ -3,10 +3,7 @@ package service;
 import Util.ValidationInputs;
 import dao.StudentLoanRepository;
 import dao.StudentRepository;
-import model.entity.GrantLoan;
-import model.entity.Person;
 import model.entity.Student;
-import model.enumes.TypeLoan;
 
 public class StudentServiceImpl {
    private StudentRepository studentRepository = StudentRepository.getInstance();
@@ -14,16 +11,15 @@ public class StudentServiceImpl {
     private StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
 
     public void signUp(Student student) {
-      /* // String password = validationInputs.validationPassword(student.getInfoAccount().getPassword());
+      String password = validationInputs.checkUserName(student.getInfoAccount().getUserName());
         if ( password != null)
             studentRepository.save(student);
         else
-            throw new RuntimeException("yourInformation is inValid");*/
-        studentRepository.save(student);
+            throw new RuntimeException("yourInformation is inValid");
     }
 
     public Student signIn(String userName, String password) {
-        String passwordStudent = validationInputs.validationPassword(password);
+        String passwordStudent = validationInputs.checkUserName(password);
         return studentRepository.findByUserNameAndPassword(userName, passwordStudent);
     }
 
