@@ -6,6 +6,7 @@ import model.enumes.Degree;
 import model.enumes.TypeLoan;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Entity
@@ -16,7 +17,7 @@ import javax.persistence.Enumerated;
 @EqualsAndHashCode()
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class GrantLoan extends Loan {
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     TypeLoan typeLoan;
     Degree degree;
 }

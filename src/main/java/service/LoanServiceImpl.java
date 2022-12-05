@@ -1,17 +1,15 @@
 package service;
 
 import Util.UtilDate;
+import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.GrantLoanRepository;
 import dao.LoanRepository;
 import model.entity.CreditCard;
 import model.entity.GrantLoan;
 import model.entity.Student;
-import model.enumes.Degree;
-import model.enumes.TypeLoan;
-import model.enumes.TypePayment;
-import model.enumes.TypeUniversity;
+import model.enumes.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,20 +17,21 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
     LoanRepository<GrantLoan> grantLoanRepository = GrantLoanRepository.getInstance();
     StudentLoanService studentLoanService = new StudentLoanService();
 
-    public void requestForGrandLoan(Student student, GrantLoan grantLoan) {
+    public void requestForGrandLoan(Student student, GrantLoan grantLoan, JalaliDate dateRegistry) {
+        TypeCity typeCity;
         double amount = 0;
-        LocalDateTime today = LocalDateTime.of(2022, 10, 25, 0, 0);
+        LocalDate today = UtilDate.changeJalaliDateToMiladi(dateRegistry);
         if (UtilDate.timeRegistryLoan(today)) {
 
             if (grantLoan.getTypeLoan().equals(TypeLoan.EDUCATION)) {
                 if (student.getStudentLoanList().stream().anyMatch(studentLoan -> studentLoan.getReceiveDate().getYear() == today.getYear()))
                     throw new RuntimeException("registry before loanEducation");
                 else {
-                    if (student.getDegree().equals(Degree.Bachelor))
+                    if (student.getDegree().equals(Degree.ContinueBachelor))
                         amount = 19e5;
-                    else if (student.getDegree().equals(Degree.Master))
+                    else if (student.getDegree().equals(Degree.ContinueMaster))
                         amount = 225e4;
-                    else if (student.getDegree().equals(Degree.PHD))
+                    else if (student.getDegree().equals(Degree.ContinuePHD))
                         amount = 26e5;
                     grantLoan.setAmount(amount);
                     grantLoan.setTypePayment(TypePayment.HALFYEAR);
@@ -47,11 +46,11 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                     throw new RuntimeException("before Registry loan TuitionLoan");
                 else {
                     if (!student.getUniversity().getTypeUniversity().equals(TypeUniversity.StateUniversityِDaily)) {
-                        if (student.getDegree().equals(Degree.Bachelor))
+                        if (student.getDegree().equals(Degree.ContinueBachelor))
                             amount = 13e5;
-                        else if (student.getDegree().equals(Degree.Master))
+                        else if (student.getDegree().equals(Degree.ContinueMaster))
                             amount = 26e5;
-                        else if (student.getDegree().equals(Degree.PHD))
+                        else if (student.getDegree().equals(Degree.ContinuePHD))
                             amount = 65e5;
 
                         grantLoan.setAmount(amount);
@@ -65,7 +64,7 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
             } else
                 throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
-        studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
+
     }
 
     @Override

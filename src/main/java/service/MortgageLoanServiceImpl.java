@@ -1,6 +1,7 @@
 package service;
 
 import Util.UtilDate;
+import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.MortgageLoanRepository;
 import dao.PersonRepository;
 import dao.StudentRepository;
@@ -12,6 +13,7 @@ import model.enumes.TypeCity;
 import model.enumes.TypePayment;
 
 import javax.imageio.plugins.jpeg.JPEGImageReadParam;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -22,10 +24,10 @@ public class MortgageLoanServiceImpl {
     StudentLoanService studentLoanService = new StudentLoanService();
     PersonRepository<Person> personRepository=new PersonRepository<>();
 
-    public void requestForMortgageLoan(Student student, MortgageLoan mortgageLoan,String lease) {
+    public void requestForMortgageLoan(Student student, MortgageLoan mortgageLoan, String lease, JalaliDate dateRegistry) {
         double amount = 0;
         TypeCity typeCity;
-        LocalDateTime today = LocalDateTime.of(2022,10,25,0,0);
+        LocalDate today=UtilDate.changeJalaliDateToMiladi(dateRegistry);
         if (UtilDate.timeRegistryLoan(today)) {
             if (!student.isMarried())
                 throw new RuntimeException("you arent married");

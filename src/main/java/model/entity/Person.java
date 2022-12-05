@@ -22,6 +22,7 @@ public class Person {
     String lastName;
     String nameFather;
     String nameMother;
+    @Column(nullable = false)
     String nationalCode;
     String numberIdentity;
     @Temporal(value = TemporalType.DATE)

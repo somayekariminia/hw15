@@ -1,17 +1,8 @@
 package view;
 
-import Util.UtilDate;
-import dao.StudentRepository;
-import model.entity.*;
-import model.enumes.Degree;
-import model.enumes.TypeUniversity;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import dao.PersonRepository;
+import model.entity.Person;
+import model.entity.Spouse;
 
 public class Main {
     /*    public static void main(String[] args) {
@@ -31,7 +22,18 @@ public class Main {
             Student student = new Student(0, "somaye", "kariminia", "ali", "maryam", "31200", "3120046981", birthday, true,"8721843", university, 1396, Degree.Master, infoAccount, false, address, null, (Spouse) spouse, creditCard);
             studentRepository.save(student);*/
     public static void main(String[] args) {
+/*        DateConverter dateConverter = new DateConverter();
+        LocalDate localDate1 = dateConverter.jalaliToGregorian(1370, 11, 28);
+        JalaliDate jalaliDate1 = dateConverter.gregorianToJalali(1992, 2, 17);
+        LocalDateTime localDateTime = localDate1.atStartOfDay();
+        LocalDate localDate = localDateTime.toLocalDate();*/
+        PersonRepository<Person> personRepository = new PersonRepository<>();
+        Person person = new Spouse();
+        person.setLastName("salajegheh");
+        person.setFirstName("ali");
+        person.setNationalCode("1234567890");
+        personRepository.save(person);
+        Person byId = personRepository.getById(1);
 
     }
-
 }

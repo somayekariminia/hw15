@@ -23,7 +23,7 @@ public class ValidationInfoCreditCard {
 
     public static boolean checkExpirationDate(Date expirationDate) {
         LocalDateTime today = LocalDateTime.now();
-        LocalDateTime expirationLDate = UtilDate.getLocalDateTime(expirationDate);
+        LocalDateTime expirationLDate = UtilDate.getLocalDateTime(expirationDate).atStartOfDay();
         if (today.getYear() <= expirationLDate.getYear() &&
                 today.getMonth().ordinal() <= expirationLDate.getMonth().ordinal())
             return true;

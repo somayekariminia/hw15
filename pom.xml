@@ -58,5 +58,10 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.eloyzone</groupId>
+            <artifactId>jalali-calendar</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>

@@ -20,16 +20,16 @@ public class Student extends Person {
     @ManyToOne(cascade = CascadeType.ALL)
     University university;
     Integer enterYear;
-    @Enumerated(value=EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     Degree degree;
     @OneToOne(cascade = CascadeType.PERSIST)
     InfoAccount infoAccount;
     boolean dorm;
     @OneToOne(cascade = CascadeType.PERSIST)
     Address address;
-    @OneToMany(mappedBy = "student" ,fetch = FetchType.EAGER)
-    List<StudentLoan> studentLoanList=new ArrayList<>();
-    @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    List<StudentLoan> studentLoanList = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     Spouse spouse;
     @OneToOne(cascade = CascadeType.PERSIST)
     CreditCard creditCard;

@@ -1,17 +1,23 @@
 package service;
 
+import Exeption.ValidationException;
 import Util.ValidationInfoCreditCard;
 import dao.CreditCardRepository;
 import model.entity.CreditCard;
 
 public class CreditCardService {
-    CreditCardRepository creditCardRepository=CreditCardRepository.getInstance();
-    public void save(CreditCard creditCard)
-    {
-        String cardNumber=ValidationInfoCreditCard.checkCreditCard(creditCard.getCardNumber());
-        String accountNumber=ValidationInfoCreditCard.checkAccountNumber(creditCard.getAccountNumber());
-        boolean expireDate=ValidationInfoCreditCard.checkExpirationDate(creditCard.getExpireDate());
-        if(cardNumber!=null && accountNumber!=null && expireDate==true)
+    CreditCardRepository creditCardRepository = CreditCardRepository.getInstance();
+
+    public void save(CreditCard creditCard) {
+        try {
+            ValidationInfoCreditCard.checkCreditCard(creditCard.getCardNumber());
+            ValidationInfoCreditCard.checkAccountNumber(creditCard.getAccountNumber());
+            ValidationInfoCreditCard.checkExpirationDate(creditCard.getExpireDate());
             creditCardRepository.save(creditCard);
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 }

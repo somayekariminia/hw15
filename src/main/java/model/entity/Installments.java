@@ -22,4 +22,6 @@ public class Installments {
     @Temporal(value = TemporalType.DATE)
     Date date;
     boolean isPaid;
+    @ManyToOne
+    StudentLoan studentLoan;
 }
