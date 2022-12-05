@@ -12,6 +12,7 @@ import java.util.Date;
 public class StudentLoanService {
     StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
     CreditCardRepository creditCardRepository = CreditCardRepository.getInstance();
+    CreditCardService creditCardService = new CreditCardService();
 
     public void registryLoan(Student student, Loan loan, Date registryDate, String lease) {
         StudentLoan studentLoan = new StudentLoan();
@@ -29,12 +30,12 @@ public class StudentLoanService {
             ValidationInfoCreditCard.checkCreditCard(creditCard.getCardNumber());
             ValidationInfoCreditCard.checkExpirationDate(creditCard.getExpireDate());
             ValidationInfoCreditCard.checkAccountNumber(creditCard.getAccountNumber());
-            NameBank nameBank = ValidationInfoCreditCard.findNameBank(creditCard.getCardNumber());
+            NameBank nameBank = creditCardService.findNameBank(creditCard.getCardNumber());
             creditCard.setBalance(loan.getAmount());
             creditCardRepository.equals(creditCardRepository);
         } catch (ValidationException e) {
             System.err.println(e.getMessage());
         }
     }
-    
+
 }

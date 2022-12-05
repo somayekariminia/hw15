@@ -31,17 +31,5 @@ public class ValidationInfoCreditCard {
             return false;
     }
 
-    public  static NameBank findNameBank(String numberCard) {
-        String subString = numberCard.substring(0, 6);
-        if (subString.equals("589463"))
-            return NameBank.RAFAH;
-        else if (subString.equals("627353"))
-            return NameBank.TAJARAT;
-        else if (subString.equals("603799"))
-            return NameBank.MELLI;
-        else if (subString.equals("628023"))
-            return NameBank.MASKAN;
-        else
-            return null;
-    }
+
 }

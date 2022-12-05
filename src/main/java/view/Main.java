@@ -34,6 +34,6 @@ public class Main {
         person.setNationalCode("1234567890");
         personRepository.save(person);
         Person byId = personRepository.getById(1);
-
+       personRepository.delete(person);
     }
 }

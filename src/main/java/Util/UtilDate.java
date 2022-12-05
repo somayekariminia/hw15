@@ -39,4 +39,9 @@ public class UtilDate {
         return localDate1;
     }
 
+    public static JalaliDate changeMiladiDateToJalali(LocalDate localDate) {
+        DateConverter dateConverter = new DateConverter();
+        JalaliDate date = dateConverter.gregorianToJalali(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth());
+        return date;
+    }
 }
