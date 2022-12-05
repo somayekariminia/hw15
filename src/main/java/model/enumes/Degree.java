@@ -1,5 +1,5 @@
 package model.enumes;
 
 public enum Degree {
-    associate, Bachelor, Master, PHD
+    PostDiploma, ContinueBachelor, ContinueMaster,DiscontinuousMaster, ContinuePHD,DiscontinuousPHD,DiscontinuousBachelor
 }

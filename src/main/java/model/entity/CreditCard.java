@@ -3,10 +3,7 @@ package model.entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -20,6 +17,7 @@ public class CreditCard {
     @Id
     int id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(length = 16)
     String cardNumber;
     String ccv2;
     String accountNumber;
