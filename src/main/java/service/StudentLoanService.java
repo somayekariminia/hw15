@@ -8,6 +8,7 @@ import model.entity.*;
 import model.enumes.NameBank;
 
 import java.util.Date;
+import java.util.List;
 
 public class StudentLoanService {
     StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
@@ -36,6 +37,10 @@ public class StudentLoanService {
         } catch (ValidationException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public List<StudentLoan> getAlLoansStudent(Student student) {
+        return studentLoanRepository.getById(student);
     }
 
 }

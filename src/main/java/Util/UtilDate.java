@@ -26,8 +26,11 @@ public class UtilDate {
         return daysBetween;
     }
 
-    public static boolean timeRegistryLoan(LocalDate date) {
-        if ((date.getMonthValue() == 10 && (date.getDayOfMonth() >= 21 && date.getDayOfMonth() <= 28)) || ((date.getMonthValue() == 2 && (date.getDayOfMonth() >= 13 && date.getDayOfMonth() <= 20))))
+    public static boolean timeRegistryLoan(JalaliDate date) {
+        if ((date.getMonthPersian().getValue() == 8 && (date.getDay() >= 1 && date.getDay() <= 8)) ||
+                (((date.getMonthPersian().getValue() == 11 && (date.getDay() >= 25 && date.getDay() <= 30))) ||
+                        (date.getMonthPersian().getValue() == 12 &&
+                                date.getDay() >= 1 && date.getDay() <= 3)))
             return true;
         else
             return false;

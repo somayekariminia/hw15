@@ -76,6 +76,7 @@ public class StudentLoanRepository implements Repository<StudentLoan> {
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("from StudentLoan s where s.student=:student", StudentLoan.class);
+            query.setParameter("student",student);
             resultList = query.getResultList();
             entityManager.getTransaction().commit();
             entityManager.close();

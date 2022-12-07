@@ -1,11 +1,14 @@
 package service;
 
+import Util.UtilDate;
 import Util.ValidationInputs;
+import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.StudentLoanRepository;
 import dao.StudentRepository;
 import model.entity.Student;
 import model.enumes.Degree;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class StudentServiceImpl {
@@ -29,20 +32,29 @@ public class StudentServiceImpl {
 
     public boolean graduate(Student student) {
         LocalDateTime today = LocalDateTime.now();
-        int graduateDate = 0;
-        if (student.getDegree().equals(Degree.ContinueBachelor) && student.equals(Degree.DiscontinuousPHD))
-            graduateDate = student.getEnterYear() + 4;
-        else if (student.getDegree().equals(Degree.DiscontinuousMaster) && student.getDegree().equals(Degree.PostDiploma) && student.equals(Degree.DiscontinuousBachelor))
-            graduateDate = student.getEnterYear() + 2;
-        else if (student.getDegree().equals(Degree.ContinueMaster))
-            graduateDate = student.getEnterYear() + 6;
-        else if (student.equals(Degree.ContinuePHD))
-            graduateDate = student.getEnterYear() + 8;
-        if (graduateDate >= today.getYear())
-            return true;
-        else return false;
+        if (student.getEnterYear() > 0) {
+            int graduateDate = 0;
+            if (student.getDegree().equals(Degree.ContinueBachelor) || student.equals(Degree.DiscontinuousPHD))
+                graduateDate = student.getEnterYear() + 4;
+            else if (student.getDegree().equals(Degree.DiscontinuousMaster) || student.getDegree().equals(Degree.PostDiploma) || student.equals(Degree.DiscontinuousBachelor))
+                graduateDate = student.getEnterYear() + 2;
+            else if (student.getDegree().equals(Degree.ContinueMaster))
+                graduateDate = student.getEnterYear() + 6;
+            else if (student.equals(Degree.ContinuePHD))
+                graduateDate = student.getEnterYear() + 8;
+            JalaliDate graduateDateJ = new JalaliDate(graduateDate, 6, 31);
+            LocalDate localGraduate = UtilDate.changeJalaliDateToMiladi(graduateDateJ);
+            if (localGraduate.getYear() < today.getYear())
+                return true;
+            else
+                return false;
+        } else
+            throw new RuntimeException("value year is negative");
     }
 
+    public void update(Student student) {
+        studentRepository.update(student);
+    }
     public Student findById(int id) {
         return studentRepository.getById(id);
     }

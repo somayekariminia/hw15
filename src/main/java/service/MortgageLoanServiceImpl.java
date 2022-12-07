@@ -8,47 +8,38 @@ import dao.StudentRepository;
 import model.entity.MortgageLoan;
 import model.entity.Person;
 import model.entity.Student;
+import model.entity.StudentLoan;
 import model.enumes.LargeCity;
 import model.enumes.TypeCity;
 import model.enumes.TypePayment;
 
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 public class MortgageLoanServiceImpl {
     MortgageLoanRepository mortgageLoanRepository = MortgageLoanRepository.getInstance();
 
     StudentRepository studentRepository = StudentRepository.getInstance();
     StudentLoanService studentLoanService = new StudentLoanService();
-    PersonRepository<Person> personRepository=new PersonRepository<>();
+    PersonRepository<Person> personRepository = new PersonRepository<>();
 
     public void requestForMortgageLoan(Student student, MortgageLoan mortgageLoan, String lease, JalaliDate dateRegistry) {
         double amount = 0;
         TypeCity typeCity;
-        LocalDate today=UtilDate.changeJalaliDateToMiladi(dateRegistry);
-        if (UtilDate.timeRegistryLoan(today)) {
+        if (UtilDate.timeRegistryLoan(dateRegistry)) {
+            LocalDate today = UtilDate.changeJalaliDateToMiladi(dateRegistry);
             if (!student.isMarried())
-                throw new RuntimeException("you arent married");
-            boolean anyMatch = student.getStudentLoanList().stream().anyMatch(studentLoan -> {
-                studentLoan.getLoan().getTypePayment().equals(null);
-                return true;
-            });
-            if (anyMatch)
-                throw new RuntimeException("you is registering  before MortgageLoan");
-            String nationalCode = student.getSpouse().getNationalCode();
-            Student student1 = studentRepository.getByNationalCode(nationalCode);
-            if(student1!=null) {
-                if (student1.getStudentLoanList().stream().anyMatch(studentLoan -> {
-                    studentLoan.getLoan().getTypePayment().equals(null);
-                    return true;
-                }))
-                    throw new RuntimeException("your Spouse get MortgageLoan");
-            }
+                throw new RuntimeException("You're not already married.");
             if (student.isDorm())
-                throw new RuntimeException("you cant register MortgageLoan becouse you have dorm ");
-
+                throw new RuntimeException("You already have a dorm.");
+            if (isGetMortgageLoan(student))
+                throw new RuntimeException("you've already taken out this loan");
+            Student student1 = studentRepository.getByNationalCode( student.getSpouse().getNationalCode());
+            if (student1 != null) {
+                if (isGetMortgageLoan(student1))
+                    throw new RuntimeException("your Spouse has already taken out this loan ");
+            }
             if (Arrays.stream(LargeCity.values()).anyMatch(value -> String.valueOf(value).equalsIgnoreCase(student.getAddress().getCity()))) {
                 typeCity = TypeCity.LargeCity;
                 amount = 26e6;
@@ -63,7 +54,14 @@ public class MortgageLoanServiceImpl {
             mortgageLoan.setAmount(amount);
             mortgageLoan.setTypePayment(TypePayment.DEGREE);
             mortgageLoanRepository.save(mortgageLoan);
-            studentLoanService.registryLoan(student, mortgageLoan, UtilDate.changeLocalDateToDate(today),lease);
+            studentLoanService.registryLoan(student, mortgageLoan, UtilDate.changeLocalDateToDate(today), lease);
         }
+    }
+
+    private  boolean isGetMortgageLoan(Student student) {
+        List<StudentLoan> loanList= studentLoanService.getAlLoansStudent(student);
+   return loanList.stream().anyMatch(studentLoan -> {
+        return studentLoan.getLease() != null;
+        });
     }
 }
