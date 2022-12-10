@@ -17,7 +17,6 @@ public class Installments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    int numberInstallments;
     double amount;
     @Temporal(value = TemporalType.DATE)
     Date date;

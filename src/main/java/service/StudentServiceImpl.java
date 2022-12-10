@@ -30,8 +30,8 @@ public class StudentServiceImpl {
     }
 
 
-    public boolean graduate(Student student) {
-        LocalDateTime today = LocalDateTime.now();
+    public int graduate(Student student) {
+
         if (student.getEnterYear() > 0) {
             int graduateDate = 0;
             if (student.getDegree().equals(Degree.ContinueBachelor) || student.equals(Degree.DiscontinuousPHD))
@@ -44,10 +44,7 @@ public class StudentServiceImpl {
                 graduateDate = student.getEnterYear() + 8;
             JalaliDate graduateDateJ = new JalaliDate(graduateDate, 6, 31);
             LocalDate localGraduate = UtilDate.changeJalaliDateToMiladi(graduateDateJ);
-            if (localGraduate.getYear() < today.getYear())
-                return true;
-            else
-                return false;
+           return localGraduate.getYear();
         } else
             throw new RuntimeException("value year is negative");
     }

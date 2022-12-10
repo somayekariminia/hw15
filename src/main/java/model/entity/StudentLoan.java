@@ -24,9 +24,11 @@ public class StudentLoan {
     Loan loan;
     @Temporal(value = TemporalType.TIMESTAMP)
     Date receiveDate;
-    @OneToMany(mappedBy = "studentLoan", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "studentLoan", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     List<Installments> installments;
     @OneToOne
     CreditCard creditCard;
     String lease;
+    int numberIsPaid;
+    int numberIsNotPaid;
 }

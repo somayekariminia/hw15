@@ -27,7 +27,7 @@ public class Student extends Person {
     boolean dorm;
     @OneToOne(cascade = CascadeType.PERSIST)
     Address address;
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     List<StudentLoan> studentLoanList = new ArrayList<>();
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     Spouse spouse;

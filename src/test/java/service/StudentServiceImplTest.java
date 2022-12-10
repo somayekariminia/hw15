@@ -37,7 +37,7 @@ class StudentServiceImplTest {
 
     @Test
     void requestLoanForGrantLoan() {
-        Student student = studentsService.findById(3);
+        Student student = studentsService.findById(2);
         GrantLoan loan = new GrantLoan();
         loan.setTypeLoan(TypeLoan.TUITION);
         JalaliDate date = new JalaliDate(1401, 8, 2);
@@ -46,7 +46,7 @@ class StudentServiceImplTest {
 
     @Test
     void requestLoanForMortgageLoan() {
-        Student student = studentsService.findById(3);
+        Student student = studentsService.findById(2);
         MortgageLoan loan = new MortgageLoan();
         String lease = "12345";
         JalaliDate jalaliDate = new JalaliDate(1401, 8, 1);
@@ -84,7 +84,7 @@ class StudentServiceImplTest {
 
     @Test
     void TestExceptionsRequestMortgageLoan() {
-        Student student = studentsService.findById(3);
+        Student student = studentsService.findById(2);
         student.setMarried(false);
         studentsService.update(student);
         Student student1 = studentsService.findById(3);

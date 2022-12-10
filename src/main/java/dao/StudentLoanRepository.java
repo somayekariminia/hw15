@@ -1,6 +1,7 @@
 package dao;
 
 import dao.interfases.Repository;
+import model.entity.Loan;
 import model.entity.Student;
 import model.entity.StudentLoan;
 
@@ -37,10 +38,11 @@ public class StudentLoanRepository implements Repository<StudentLoan> {
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            String str = "update   StudentLoan s set s.student=:student where s.student=:student and s.loan=:loan";
+            String str = "update   StudentLoan s set s.installments=:installments where s.student=:student and s.loan=:loan";
             Query query = entityManager.createQuery(str);
             query.setParameter("student", studentLoan.getStudent());
             query.setParameter("loan", studentLoan.getLoan());
+            query.setParameter("installments",studentLoan.getInstallments());
             query.executeUpdate();
             entityManager.getTransaction().commit();
             entityManager.close();
@@ -70,13 +72,31 @@ public class StudentLoanRepository implements Repository<StudentLoan> {
         return null;
     }
 
-    public List<StudentLoan> getById(Student student) {
+    public StudentLoan getByIdStudent(Student student, Loan loan) {
+        StudentLoan studentLoan = null;
+        EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("from StudentLoan s where s.student=:student and s.loan=:loan");
+            query.setParameter("student", student);
+            query.setParameter("loan", loan);
+            studentLoan = (StudentLoan) query.getSingleResult();
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return studentLoan;
+
+    }
+
+    public List<StudentLoan> getByIdStudent(Student student) {
         List<StudentLoan> resultList = new ArrayList<>();
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("from StudentLoan s where s.student=:student", StudentLoan.class);
-            query.setParameter("student",student);
+            query.setParameter("student", student);
             resultList = query.getResultList();
             entityManager.getTransaction().commit();
             entityManager.close();

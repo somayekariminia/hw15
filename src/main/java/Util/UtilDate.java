@@ -47,4 +47,11 @@ public class UtilDate {
         JalaliDate date = dateConverter.gregorianToJalali(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth());
         return date;
     }
+    public static LocalDate incrementToMonth(LocalDate date){
+        if(date.getMonthValue()==12)
+            date=date.of(date.getYear()+1,1,date.getDayOfMonth());
+        else
+           date= date.of(date.getYear(),date.getMonthValue()+1, date.getDayOfMonth());
+        return  date;
+    }
 }
