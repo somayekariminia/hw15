@@ -5,10 +5,7 @@ import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.MortgageLoanRepository;
 import dao.PersonRepository;
 import dao.StudentRepository;
-import model.entity.MortgageLoan;
-import model.entity.Person;
-import model.entity.Student;
-import model.entity.StudentLoan;
+import model.entity.*;
 import model.enumes.LargeCity;
 import model.enumes.TypeCity;
 import model.enumes.TypePayment;
@@ -63,5 +60,8 @@ public class MortgageLoanServiceImpl {
    return loanList.stream().anyMatch(studentLoan -> {
         return studentLoan.getLease() != null;
         });
+    }
+    public Loan getById(int id){
+       return mortgageLoanRepository.getById(id);
     }
 }

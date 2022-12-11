@@ -43,6 +43,9 @@ public class StudentLoanService {
             System.err.println(e.getMessage());
         }
     }
+    public StudentLoan getByStudentLoan(Student student,Loan loan){
+        return studentLoanRepository.getByIdStudentLoan(student,loan);
+    }
 
     public List<StudentLoan> getAlLoansStudent(Student student) {
         return studentLoanRepository.getByIdStudent(student);

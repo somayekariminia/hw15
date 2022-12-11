@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode()
+@EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Installments {
     @Id
@@ -24,4 +24,10 @@ public class Installments {
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     StudentLoan studentLoan;
+
+    @Override
+    public String toString() {
+        return
+                " id: " + id + " amount: " + amount + "  date: " + date + " isPaid: " + isPaid +"\n";
+    }
 }

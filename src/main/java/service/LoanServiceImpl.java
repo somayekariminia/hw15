@@ -5,6 +5,7 @@ import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.GrantLoanRepository;
 import dao.LoanRepository;
 import model.entity.GrantLoan;
+import model.entity.Loan;
 import model.entity.Student;
 import model.entity.StudentLoan;
 import model.enumes.Degree;
@@ -68,7 +69,8 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
                 amount = 19e5;
             else if (student.getDegree().equals(Degree.ContinueMaster) || student.getDegree().equals(Degree.DiscontinuousMaster) || equals(Degree.ContinuePHD))
                 amount = 225e4;
-            else if (student.getDegree().equals(Degree.DiscontinuousPHD)) amount = 26e5;
+            else if (student.getDegree().equals(Degree.DiscontinuousPHD))
+                amount = 26e5;
             grantLoan.setAmount(amount);
             grantLoan.setTypePayment(TypePayment.HALFYEAR);
             grantLoan.setDegree(student.getDegree());
@@ -76,5 +78,10 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
             grantLoanRepository.save(grantLoan);
             studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
         }
+    }
+
+    @Override
+    public Loan getById(int id) {
+        return grantLoanRepository.getById(id);
     }
 }

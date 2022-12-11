@@ -51,16 +51,20 @@ public class InstallmentsRepository {
         return installments;
     }
 
-    public void update(Installments installments) {
+    public Installments update(Installments installments) {
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
+        Installments merge = null;
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(installments);
+            Installments installments1 = entityManager.find(Installments.class, installments.getId());
+            installments1.setPaid(true);
+            merge = entityManager.merge(installments);
             entityManager.getTransaction().commit();
             entityManager.close();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
+        return merge;
     }
 
     public Installments getById(int id) {

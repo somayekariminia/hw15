@@ -3,6 +3,7 @@ package service;
 import Util.UtilDate;
 import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.PersonRepository;
+import dao.StudentRepository;
 import model.entity.*;
 import model.enumes.Degree;
 import model.enumes.TypeLoan;
@@ -29,7 +30,7 @@ class StudentServiceImplTest {
     LoanServiceImpl loanService = new LoanServiceImpl();
     MortgageLoanServiceImpl mortgageLoanService = new MortgageLoanServiceImpl();
     StudentLoanService studentLoanService = new StudentLoanService();
-
+  StudentRepository studentRepository= StudentRepository.getInstance();
     @BeforeAll
     static void setInformationStudent() {
     }
@@ -80,6 +81,10 @@ class StudentServiceImplTest {
     void graduateTest() {
         Student student = studentsService.findById(3);
 
+    }
+    @Test
+    void getStudentByNationalCode(){
+       studentRepository.getByNationalCode("31200");
     }
 
     @Test

@@ -8,10 +8,11 @@ import model.entity.Installments;
 import model.entity.StudentLoan;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class InstallmentsService {
@@ -55,7 +56,22 @@ public class InstallmentsService {
         else
             throw new RuntimeException("list is empty");
     }
-    public void paidInstallments(int id){
-        installmentsRepository.getById(id);
+
+    public Installments paidInstallments(int id) {
+        Installments installment = installmentsRepository.getById(id);
+        installment.setPaid(true);
+        return installmentsRepository.update(installment);
+    }
+
+    public List<Installments> isPaidInstallments(StudentLoan studentLoan) {
+        List<Installments> installments = allInstallment(studentLoan);
+        return installments.stream().filter(Installments::isPaid).sorted(Comparator.comparing(Installments::getDate)).collect(Collectors.toList());
+
+    }
+
+    public List<Installments> isNotPaidInstallments(StudentLoan studentLoan) {
+        List<Installments> installments = allInstallment(studentLoan);
+        return installments.stream().filter(installments1 -> !installments1.isPaid()).sorted(Comparator.comparing(Installments::getDate)).toList();
+
     }
 }

@@ -17,7 +17,7 @@ class StudentLoanServiceTest {
     @Test
     void getAllLoanStudent() {
         Student student = studentRepository.getById(3);
-        List<StudentLoan> loans = studentLoanRepository.getByIdStudent(student);
+        List<StudentLoan> loans = studentLoanRepository.getByIdStudentLoan(student);
         assertNotNull(loans);
     }
 }

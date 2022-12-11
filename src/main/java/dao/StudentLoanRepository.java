@@ -72,7 +72,7 @@ public class StudentLoanRepository implements Repository<StudentLoan> {
         return null;
     }
 
-    public StudentLoan getByIdStudent(Student student, Loan loan) {
+    public StudentLoan getByIdStudentLoan(Student student, Loan loan) {
         StudentLoan studentLoan = null;
         EntityManager entityManager = ConfigJpa.getInstance().createEntityManager();
         try {
