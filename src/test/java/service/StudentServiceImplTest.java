@@ -79,7 +79,7 @@ class StudentServiceImplTest {
     @Test
     void graduateTest() {
         Student student = studentsService.findById(3);
-        Assert.assertTrue(studentsService.graduate(student));
+
     }
 
     @Test

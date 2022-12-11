@@ -21,6 +21,7 @@ public class Installments {
     @Temporal(value = TemporalType.DATE)
     Date date;
     boolean isPaid;
-    @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     StudentLoan studentLoan;
 }

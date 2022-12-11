@@ -5,7 +5,8 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -24,8 +25,8 @@ public class StudentLoan {
     Loan loan;
     @Temporal(value = TemporalType.TIMESTAMP)
     Date receiveDate;
-    @OneToMany(mappedBy = "studentLoan", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    List<Installments> installments;
+    @OneToMany(mappedBy = "studentLoan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    Set<Installments> installments = new HashSet<>();
     @OneToOne
     CreditCard creditCard;
     String lease;

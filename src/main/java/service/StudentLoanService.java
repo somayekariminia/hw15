@@ -10,6 +10,7 @@ import model.enumes.NameBank;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class StudentLoanService {
     StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
@@ -23,7 +24,7 @@ public class StudentLoanService {
         studentLoan.setCreditCard(student.getCreditCard());
         studentLoan.setReceiveDate(registryDate);
         JalaliDate jalaliDate=new JalaliDate(1396,6,31);
-        List<Installments> installments = installmentsService.calculateInstallments(studentLoan, jalaliDate);
+        Set<Installments> installments = installmentsService.calculateInstallments(studentLoan, jalaliDate);
         studentLoan.setInstallments(installments);
         if (loan instanceof MortgageLoan)
             studentLoan.setLease(lease);

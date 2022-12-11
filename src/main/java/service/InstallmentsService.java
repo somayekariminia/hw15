@@ -9,7 +9,9 @@ import model.entity.StudentLoan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class InstallmentsService {
@@ -17,13 +19,13 @@ public class InstallmentsService {
     private StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
     private StudentServiceImpl studentService = new StudentServiceImpl();
 
-    public List<Installments> calculateInstallments(StudentLoan studentLoan, JalaliDate date) {
+    public Set<Installments> calculateInstallments(StudentLoan studentLoan, JalaliDate date) {
         LocalDate localDate = UtilDate.changeJalaliDateToMiladi(date);
         double amount = studentLoan.getLoan().getAmount();
         int yearsPayment = 5;
         double profit = 0.4;
         double installmentFirstYear = calculateInstallmentFirstYear(amount, yearsPayment, profit);
-        List<Installments> installmentsList = new ArrayList<>();
+        Set<Installments> installmentsList = new HashSet<>();
         LocalDate localDate1 = localDate;
         for (int i = 1; i <= yearsPayment; i++) {
             for (int j = 1; j <= 12; j++) {
