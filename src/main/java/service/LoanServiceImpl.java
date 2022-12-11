@@ -4,10 +4,7 @@ import Util.UtilDate;
 import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.GrantLoanRepository;
 import dao.LoanRepository;
-import model.entity.GrantLoan;
-import model.entity.Loan;
-import model.entity.Student;
-import model.entity.StudentLoan;
+import model.entity.*;
 import model.enumes.Degree;
 import model.enumes.TypeLoan;
 import model.enumes.TypePayment;
@@ -22,17 +19,17 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
     StudentServiceImpl studentService = new StudentServiceImpl();
 
     @Override
-    public void requestLoan(Student student, GrantLoan grantLoan, JalaliDate dateRegistry) {
+    public void requestLoan(Student student, GrantLoan grantLoan, JalaliDate dateRegistry, CreditCard creditCard) {
         if (UtilDate.timeRegistryLoan(dateRegistry)) {
             LocalDate today = UtilDate.changeJalaliDateToMiladi(dateRegistry);
             List<StudentLoan> studentLoans = studentLoanService.getAlLoansStudent(student);
 
             if (grantLoan.getTypeLoan().equals(TypeLoan.EDUCATION)) {
                 if (!isGetLoan(today, studentLoans)) throw new RuntimeException("you registry this loan before");
-                registryEducationLoan(student, grantLoan, today);
+                registryEducationLoan(student, grantLoan, today,creditCard);
             } else if (grantLoan.getTypeLoan().equals(TypeLoan.TUITION)) {
                 if (!isGetLoan(today, studentLoans)) throw new RuntimeException("you registry this loan before");
-                registryTuitionLoan(student, grantLoan, today);
+                registryTuitionLoan(student, grantLoan, today, creditCard);
             } else throw new RuntimeException("dont give loan to student StateUniversityDail");
         }
     }
@@ -43,7 +40,7 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
         });
     }
 
-    private void registryTuitionLoan(Student student, GrantLoan grantLoan, LocalDate today) {
+    private void registryTuitionLoan(Student student, GrantLoan grantLoan, LocalDate today,CreditCard creditCard) {
         double amount = 0;
         if (!student.getUniversity().getTypeUniversity().equals(TypeUniversity.StateUniversityِDaily)) {
             if (student.getDegree().equals(Degree.ContinueBachelor) || student.getDegree().equals(Degree.PostDiploma) || student.getDegree().equals(Degree.DiscontinuousBachelor))
@@ -56,11 +53,11 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
             grantLoan.setDegree(student.getDegree());
             grantLoan.setTypeLoan(TypeLoan.EDUCATION);
             grantLoanRepository.save(grantLoan);
-            studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
+            studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null,creditCard);
         }
     }
 
-    private void registryEducationLoan(Student student, GrantLoan grantLoan, LocalDate today) {
+    private void registryEducationLoan(Student student, GrantLoan grantLoan, LocalDate today,CreditCard creditCard) {
         double amount = 0;
         if (student.getStudentLoanList().stream().anyMatch(studentLoan -> studentLoan.getReceiveDate().getYear() == today.getYear()))
             throw new RuntimeException("registry before loanEducation");
@@ -76,7 +73,7 @@ public class LoanServiceImpl implements LoanService<GrantLoan> {
             grantLoan.setDegree(student.getDegree());
             grantLoan.setTypeLoan(TypeLoan.EDUCATION);
             grantLoanRepository.save(grantLoan);
-            studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null);
+            studentLoanService.registryLoan(student, grantLoan, UtilDate.changeLocalDateToDate(today), null,creditCard);
         }
     }
 

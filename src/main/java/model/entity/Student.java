@@ -31,10 +31,8 @@ public class Student extends Person {
     List<StudentLoan> studentLoanList = new ArrayList<>();
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     Spouse spouse;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    CreditCard creditCard;
 
-    public Student(int id, String firstName, String lastName, String nameFather, String nameMother, String nationalCode, String numberIdentity, Date birthday, boolean isMarried, String numberStudent, University university, Integer enterYear, Degree degree, InfoAccount infoAccount, boolean dorm, Address address, List<StudentLoan> studentLoanList, Spouse spouse, CreditCard creditCard) {
+    public Student(int id, String firstName, String lastName, String nameFather, String nameMother, String nationalCode, String numberIdentity, Date birthday, boolean isMarried, String numberStudent, University university, Integer enterYear, Degree degree, InfoAccount infoAccount, boolean dorm, Address address, List<StudentLoan> studentLoanList, Spouse spouse) {
         super(id, firstName, lastName, nameFather, nameMother, nationalCode, numberIdentity, birthday, isMarried);
         this.numberStudent = numberStudent;
         this.university = university;
@@ -45,6 +43,5 @@ public class Student extends Person {
         this.address = address;
         this.studentLoanList = studentLoanList;
         this.spouse = spouse;
-        this.creditCard = creditCard;
     }
 }

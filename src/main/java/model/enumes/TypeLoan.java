@@ -1,5 +1,5 @@
 package model.enumes;
 
 public enum TypeLoan {
-    EDUCATION, TUITION
+    EDUCATION, TUITION,MORTGAGELOAN
 }

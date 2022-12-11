@@ -24,7 +24,6 @@ public class Installments {
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     StudentLoan studentLoan;
-
     @Override
     public String toString() {
         return

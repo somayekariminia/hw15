@@ -4,6 +4,7 @@ import Util.UtilDate;
 import com.github.eloyzone.jalalicalendar.JalaliDate;
 import dao.InstallmentsRepository;
 import dao.StudentLoanRepository;
+import model.entity.CreditCard;
 import model.entity.Installments;
 import model.entity.StudentLoan;
 
@@ -57,10 +58,19 @@ public class InstallmentsService {
             throw new RuntimeException("list is empty");
     }
 
-    public Installments paidInstallments(int id) {
-        Installments installment = installmentsRepository.getById(id);
-        installment.setPaid(true);
-        return installmentsRepository.update(installment);
+    public Installments paidInstallments(StudentLoan studentLoan, int id, String cardNumber, int cvv2, JalaliDate date) {
+        CreditCard creditCard = studentLoan.getCreditCard();
+        Installments installment=null;
+        Installments updateInstallments=null;
+        if (creditCard.getCardNumber().equals(cardNumber) && creditCard.getCcv2()==cvv2) {
+            LocalDate expireDate = UtilDate.changeJalaliDateToMiladi(date);
+            LocalDate today = LocalDate.now();
+            if (expireDate.getYear() >= today.getYear() && expireDate.getMonthValue() >= today.getMonthValue())
+              installment = installmentsRepository.getById(id);
+            installment.setPaid(true);
+            updateInstallments = installmentsRepository.update(installment);
+        }
+        return updateInstallments;
     }
 
     public List<Installments> isPaidInstallments(StudentLoan studentLoan) {

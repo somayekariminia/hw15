@@ -41,7 +41,13 @@ class InstallmentTests {
 
     @Test
     void PaidInstallmentsTest() {
-        Installments installments = installmentsService.paidInstallments(2);
+        String numberCard = "5894631298123456";
+        int cvv2 = 661;
+        JalaliDate exprDate = new JalaliDate(1402, 12, 01);
+        Loan loan = loanRepository.getById(1);
+        Student student = studentRepository.getById(2);
+        StudentLoan studentLoan = studentLoanRepository.getByIdStudentLoan(student, loan);
+        Installments installments = installmentsService.paidInstallments(studentLoan, 1, numberCard, cvv2, exprDate);
         assertNotNull(installments);
     }
 

@@ -30,6 +30,4 @@ public class StudentLoan {
     @OneToOne
     CreditCard creditCard;
     String lease;
-    int numberIsPaid;
-    int numberIsNotPaid;
 }

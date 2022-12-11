@@ -24,6 +24,4 @@ public class Address {
     String country;
     String city;
     String Street;
-    String allay;
-    String plack;
 }

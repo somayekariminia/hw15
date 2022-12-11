@@ -21,7 +21,7 @@ public class MortgageLoanServiceImpl {
     StudentLoanService studentLoanService = new StudentLoanService();
     PersonRepository<Person> personRepository = new PersonRepository<>();
 
-    public void requestForMortgageLoan(Student student, MortgageLoan mortgageLoan, String lease, JalaliDate dateRegistry) {
+    public void requestForMortgageLoan(Student student, MortgageLoan mortgageLoan, String lease, JalaliDate dateRegistry,CreditCard creditCard) {
         double amount = 0;
         TypeCity typeCity;
         if (UtilDate.timeRegistryLoan(dateRegistry)) {
@@ -51,7 +51,7 @@ public class MortgageLoanServiceImpl {
             mortgageLoan.setAmount(amount);
             mortgageLoan.setTypePayment(TypePayment.DEGREE);
             mortgageLoanRepository.save(mortgageLoan);
-            studentLoanService.registryLoan(student, mortgageLoan, UtilDate.changeLocalDateToDate(today), lease);
+            studentLoanService.registryLoan(student, mortgageLoan, UtilDate.changeLocalDateToDate(today), lease,creditCard);
         }
     }
 

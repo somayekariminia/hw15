@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface LoanService<T> {
 
-    void requestLoan(Student student, T loan, JalaliDate date);
+    void requestLoan(Student student, T loan, JalaliDate date,CreditCard creditCard);
     public Loan getById(int id);
 
 

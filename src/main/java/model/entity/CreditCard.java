@@ -20,7 +20,7 @@ public class CreditCard {
     @Column(length = 16, unique = true, nullable = false)
     String cardNumber;
     @Column(length = 4, nullable = false)
-    String ccv2;
+    int ccv2;
     @Column(length = 10, nullable = false)
     String accountNumber;
     double balance;
