@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 
 public class InstallmentsService {
-    private InstallmentsRepository installmentsRepository = InstallmentsRepository.getInstance();
-    private StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
-    private StudentServiceImpl studentService = new StudentServiceImpl();
+    private final InstallmentsRepository installmentsRepository = InstallmentsRepository.getInstance();
+    private final StudentLoanRepository studentLoanRepository = StudentLoanRepository.getInstance();
+    private final StudentServiceImpl studentService = new StudentServiceImpl();
 
     public Set<Installments> calculateInstallments(StudentLoan studentLoan, JalaliDate date) {
         LocalDate localDate = UtilDate.changeJalaliDateToMiladi(date);
@@ -29,6 +29,7 @@ public class InstallmentsService {
         double installmentFirstYear = calculateInstallmentFirstYear(amount, yearsPayment, profit);
         Set<Installments> installmentsList = new HashSet<>();
         LocalDate localDate1 = localDate;
+        double installmentFirstValue=0;
         for (int i = 1; i <= yearsPayment; i++) {
             for (int j = 1; j <= 12; j++) {
                 Installments installments1 = new Installments();
@@ -36,7 +37,9 @@ public class InstallmentsService {
                 installments1.setPaid(false);
                 localDate1 = UtilDate.incrementToMonth(localDate1);
                 installments1.setDate(UtilDate.changeLocalDateToDate(localDate1));
-                installments1.setAmount(installmentFirstYear + (Math.pow(yearsPayment - 1, 0.2)) * installmentFirstYear);
+                double value=installmentFirstYear + (Math.pow(yearsPayment , 0.2)) * installmentFirstValue;
+                installments1.setAmount(value );
+                installmentFirstValue=installmentFirstYear;
                 installmentsList.add(installments1);
             }
         }

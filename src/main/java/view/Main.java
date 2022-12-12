@@ -12,6 +12,4 @@ public class Main {
         MenuStudent menuStudent=new MenuStudent();
         menuStudent.menuFirst();
     }
-
-
 }

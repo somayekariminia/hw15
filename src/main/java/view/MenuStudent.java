@@ -51,7 +51,7 @@ public class MenuStudent {
     }
 
     private void menuLoan(Student student) {
-        ;
+        System.out.println("1: registry\n2: repayment\n3: back");
         if (student != null) {
             int choice = scanner.nextInt();
             switch (choice) {
@@ -78,7 +78,7 @@ public class MenuStudent {
         StudentLoan studentLoan = getStudentLoan(student);
         int graduate = studentService.graduate(student);
         if (graduate > localDate.getYear()) {
-            System.out.println("enter");
+            System.out.println("1: allinstallments\n2: intstallmentsPaid\n3: intstallmentsisNotPaid\n4:repaymentOfLoan ");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -124,6 +124,7 @@ public class MenuStudent {
     }
 
     private void registryLoan(Student student) {
+        System.out.println("1: grateLoan(education or TUITION)\n 2:MortgageLoan");
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
